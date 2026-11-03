@@ -125,7 +125,7 @@ npm run build:weapp
 ### 微信小程序说明
 
 - 6 个页面：首页 / 工坊 / 我的 / 创建作品 / 作品详情 / 章节复审，功能与移动端 H5 一致
-- 后端地址在 `miniprogram/src/services/api.ts` 顶部 `BASE_URL` 配置，默认 `http://192.168.124.40:8080/api`，改成本机局域网 IP 即可
+- 后端地址在 `miniprogram/src/services/api.ts` 顶部 `BASE_URL` 配置，默认 `http://127.0.0.1:8080/api`，改成本机局域网 IP 即可
 - 真机调试需手机与电脑同一 WiFi，微信开发者工具勾选「不校验合法域名」
 
 ### 后端端口 / Context Path
