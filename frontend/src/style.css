@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* iPhone 下 16px 可避免输入框聚焦时的自动缩放 */
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* 移动端禁止点击元素时的高亮背景 */
+  -webkit-tap-highlight-color: transparent;
+  /* 移动端 100vh 会被地址栏吃掉, 改用 svh 让主容器更贴近可视区 */
+  min-height: 100svh;
+  overflow-x: hidden;
+  touch-action: manipulation;
+}
+
+/* 全局横向溢出兜底: Element Plus 某些组件 (Table / Dialog) 在窄屏下会产生, 这里给主容器包一层 auto 滚动 */
+.app-root, .el-main, .h-full > .el-card {
+  /* 不要强制加 overflow, 保留各页面自己的滚动 */
+}
+
+/* 窄屏给 Element Plus 通用组件加点安全区 */
+@media (max-width: 767px) {
+  body {
+    /* 避免 iOS 底部手势条遮挡操作区 */
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  /* Element Plus Dialog 在窄屏时默认会自己拉满宽度, 这里兜底一下 */
+  .el-dialog {
+    max-width: 96vw !important;
+  }
+}

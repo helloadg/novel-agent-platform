@@ -1,0 +1,98 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding: 0 $page-padding;
+  padding-top: 48rpx;
+}
+
+.profile {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+  border-radius: $radius-lg;
+  padding: 48rpx 32rpx;
+  display: flex;
+  align-items: center;
+  gap: 28rpx;
+  color: $color-text-white;
+  margin-bottom: 32rpx;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56rpx;
+  font-weight: $font-weight-semibold;
+}
+
+.profileInfo {
+  flex: 1;
+}
+.profileName {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  margin-bottom: 8rpx;
+}
+.profileDesc {
+  font-size: $font-size-sm;
+  opacity: 0.85;
+}
+
+.menuCard {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: 8rpx 32rpx;
+  box-shadow: $shadow-card;
+  margin-bottom: 24rpx;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx 0;
+  border-bottom: 2rpx solid $color-divider;
+  &:last-child {
+    border-bottom: none;
+  }
+}
+.menuLeft {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+.menuIcon {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 12rpx;
+  background: #eff6ff;
+  color: $color-primary;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.menuText {
+  font-size: $font-size-md;
+  color: $color-text-primary;
+}
+.menuArrow {
+  color: $color-text-tertiary;
+  font-size: 36rpx;
+}
+
+.version {
+  text-align: center;
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+  margin-top: 60rpx;
+}
+
+.tap {
+  opacity: 0.86;
+}

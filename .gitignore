@@ -1,0 +1,35 @@
+# ===== Java =====
+*.class
+*.jar
+*.war
+*.iml
+.idea/
+.vscode/
+target/
+build/
+out/
+
+# ===== Node / Frontend =====
+node_modules/
+dist/
+.DS_Store
+*.log
+.env
+.env.local
+.env.*.local
+
+# ===== OS =====
+Thumbs.db
+
+# ===== Docker =====
+docker-compose.override.yml
+
+# ===== Maven =====
+.mvn/wrapper/maven-wrapper.jar
+
+# ===== IDEA =====
+*.log
+*.tmp
+*.bak
+*.swp
+*~

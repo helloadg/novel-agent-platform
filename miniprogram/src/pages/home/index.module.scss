@@ -1,0 +1,133 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #eff6ff 0%, $color-bg-page 260rpx);
+  padding: 0 $page-padding;
+  padding-bottom: 120rpx;
+}
+
+.hero {
+  padding: 80rpx 0 40rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+.heroTitle {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+.heroSubtitle {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+}
+
+.ctaCard {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+  border-radius: $radius-lg;
+  padding: 40rpx 32rpx;
+  box-shadow: $shadow-float;
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  margin-bottom: $spacing-lg;
+}
+.ctaTextWrap {
+  flex: 1;
+  color: $color-text-white;
+}
+.ctaTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  margin-bottom: 8rpx;
+}
+.ctaDesc {
+  font-size: $font-size-sm;
+  opacity: 0.85;
+}
+.ctaArrow {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 40rpx;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 0 20rpx;
+}
+.sectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+.sectionMore {
+  font-size: $font-size-sm;
+  color: $color-primary;
+}
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: 32rpx;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12rpx;
+}
+.cardTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include text-ellipsis;
+  flex: 1;
+  margin-right: 16rpx;
+}
+.statusTag {
+  font-size: $font-size-xs;
+  padding: 4rpx 16rpx;
+  border-radius: $radius-button;
+  white-space: nowrap;
+}
+.statusRunning { background: #dbeafe; color: $color-primary; }
+.statusDone    { background: #d1fae5; color: $color-success; }
+.statusFailed  { background: #fee2e2; color: $color-error; }
+.statusOutline { background: #fef3c7; color: $color-warning; }
+
+.cardMeta {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  display: flex;
+  gap: 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.progressBar {
+  height: 8rpx;
+  background: #e5e7eb;
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, $color-primary-light, $color-primary);
+  border-radius: 4rpx;
+  transition: width 0.4s ease;
+}
+
+.empty {
+  text-align: center;
+  padding: 80rpx 0;
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
+.tap {
+  opacity: 0.86;
+}

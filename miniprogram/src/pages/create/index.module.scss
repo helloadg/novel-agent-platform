@@ -1,0 +1,133 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding: $spacing-lg $page-padding;
+  padding-bottom: 200rpx;
+}
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.fieldLabel {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: #f9fafb;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-md;
+  padding: 20rpx 24rpx;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  transition: border-color $transition-base;
+
+  &:focus {
+    border-color: $color-primary;
+  }
+}
+
+.textarea {
+  min-height: 240rpx;
+  line-height: 1.6;
+}
+
+.chipGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.chip {
+  padding: 14rpx 28rpx;
+  border-radius: 32rpx;
+  font-size: $font-size-sm;
+  background: #f3f4f6;
+  color: $color-text-secondary;
+  border: 2rpx solid transparent;
+  &.active {
+    background: #eff6ff;
+    color: $color-primary;
+    border-color: $color-primary-light;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.row2 {
+  display: flex;
+  gap: $spacing-md;
+}
+.half { flex: 1; }
+
+.footerBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24rpx $page-padding;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  background: $color-bg-card;
+  box-shadow: $shadow-float;
+}
+
+.submitBtn {
+  @include button-reset;
+  height: $button-height-lg;
+  border-radius: $radius-button;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+  color: $color-text-white;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  width: 100%;
+  transition: all $transition-base;
+  &:active { opacity: 0.92; transform: scale(0.99); }
+  &.disabled { opacity: 0.6; }
+}
+
+.hint {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 12rpx;
+}
+
+/* 自定义章节数 */
+.customRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-top: $spacing-sm;
+}
+
+.customLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.customInput {
+  width: 160rpx;
+  background: #f9fafb;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-sm;
+  padding: 8rpx 16rpx;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.tap {
+  opacity: 0.86;
+}

@@ -1,0 +1,106 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: novel-agent-platform
+
+  # Jackson: 日期统一格式, Long 自增 ID 不会超 JS 安全整数所以无需额外处理
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+  # 文件上传 (小说大纲/设定文档可能用到)
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 30MB
+
+  # ============ PostgreSQL (唯一数据源) ============
+  datasource:
+    url: jdbc:postgresql://${PG_HOST:localhost}:${PG_PORT:5432}/${PG_DB:novel_agent}
+    username: ${PG_USER:postgres}
+    password: ${PG_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  # 启动时执行建表脚本 (PostgreSQL 非内嵌库, 默认的 embedded 模式不会执行)
+  # schema.sql 全部为 IF NOT EXISTS, 幂等可重复执行; 注意它不负责创建 database 本身
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+# ============ MyBatis-Plus ============
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# ============ Actuator / Prometheus ============
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+# ============ LangChain4j (默认 LLM, 动态可覆盖) ============
+langchain4j:
+  open-ai:
+    chat-model:
+      api-key: ${OPENAI_API_KEY:sk-demo}
+      base-url: ${OPENAI_BASE_URL:https://api.deepseek.com/v1}
+      model-name: ${OPENAI_MODEL_NAME:deepseek-chat}
+      temperature: 0.7
+      timeout: PT60S
+
+# ============ 小说写作多智能体协同 ============
+novel:
+  # 模型档位: creative 高温度激发创意 / balanced 常规 / strict 低温保证结构化输出
+  # 每档的 base-url / api-key / model-name 在页面模型配置里独立设置, 这里只给默认值
+  profile:
+    creative:
+      temperature: 0.9
+      timeout-seconds: 300
+      # 单章 2000 字约 3000+ tokens; 推理模型的思考 token 也计入该上限, 必须留足
+      max-tokens: 16000
+    balanced:
+      temperature: 0.7
+      # 大纲/摘要类输出较长, 且推理模型的思考 token 计入上限
+      timeout-seconds: 900
+      max-tokens: 16384
+    strict:
+      temperature: 0.2
+      # 重要: 推理模型会先用数千 token 思考。实测 max-tokens=4096 时思考占满额度,
+      # 正文 content 为空 (finish_reason=length), 表现为"模型未返回内容"
+      timeout-seconds: 600
+      max-tokens: 16384
+  # 单章目标字数
+  chapter-target-words: 2000
+  # 审核不通过时允许的最大重写轮次
+  chapter-max-rewrite: 2
+  # 是否启用润色环节
+  polish-enabled: true
+  # 上下文预算
+  context:
+    worldview-max-chars: 2000
+    characters-max-chars: 1200
+    recent-summary-count: 3
+    tail-chars: 800
+
+logging:
+  level:
+    root: INFO
+    com.novel.agent: DEBUG

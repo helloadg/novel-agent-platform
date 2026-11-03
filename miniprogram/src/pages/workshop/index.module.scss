@@ -1,0 +1,138 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding: 0 $page-padding;
+}
+
+.toolbar {
+  display: flex;
+  gap: $spacing-sm;
+  padding: 24rpx 0 16rpx;
+}
+
+.chip {
+  padding: 12rpx 28rpx;
+  border-radius: 32rpx;
+  font-size: $font-size-sm;
+  background: $color-bg-card;
+  color: $color-text-secondary;
+  border: 2rpx solid $color-border;
+  transition: all $transition-base;
+  &.active {
+    background: $color-primary;
+    color: $color-text-white;
+    border-color: $color-primary;
+  }
+}
+
+.list {
+  padding-bottom: 120rpx;
+}
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: 32rpx;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16rpx;
+  margin-bottom: 12rpx;
+}
+
+.title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  flex: 1;
+  @include text-ellipsis;
+}
+
+.tag {
+  font-size: $font-size-xs;
+  padding: 4rpx 16rpx;
+  border-radius: $radius-button;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &.running  { background: #dbeafe; color: $color-primary; }
+  &.done     { background: #d1fae5; color: $color-success; }
+  &.failed   { background: #fee2e2; color: $color-error; }
+  &.outline  { background: #fef3c7; color: $color-warning; }
+  &.draft    { background: #f3f4f6; color: $color-text-tertiary; }
+}
+
+.meta {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  display: flex;
+  gap: 24rpx;
+  flex-wrap: wrap;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  flex: 1;
+}
+
+.progressTrack {
+  flex: 1;
+  height: 6rpx;
+  background: #e5e7eb;
+  border-radius: 3rpx;
+  overflow: hidden;
+}
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, $color-primary-light, $color-primary);
+  border-radius: 3rpx;
+}
+.progressText {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  white-space: nowrap;
+}
+
+.empty {
+  text-align: center;
+  padding: 120rpx 0;
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
+.fab {
+  position: fixed;
+  right: 48rpx;
+  bottom: 140rpx;
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+  color: $color-text-white;
+  font-size: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(59, 130, 246, 0.5);
+  z-index: 10;
+}
+
+.tap {
+  opacity: 0.86;
+}

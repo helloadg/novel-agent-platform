@@ -1,0 +1,232 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding: $spacing-lg $page-padding;
+  padding-bottom: 160rpx;
+}
+
+.title {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: 8rpx;
+  @include text-ellipsis;
+}
+
+.metaRow {
+  display: flex;
+  gap: 16rpx;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 24rpx;
+}
+.statusChip {
+  font-size: $font-size-xs;
+  padding: 6rpx 20rpx;
+  border-radius: $radius-button;
+  background: #f3f4f6;
+  color: $color-text-tertiary;
+  &.running  { background: #dbeafe; color: $color-primary; }
+  &.done     { background: #d1fae5; color: $color-success; }
+  &.failed   { background: #fee2e2; color: $color-error; }
+  &.outline  { background: #fef3c7; color: $color-warning; }
+}
+.metaText {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+.cardTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.contentBox {
+  background: #f9fafb;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-md;
+  padding: 20rpx 24rpx;
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.editor {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 160rpx;
+  background: #f9fafb;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-md;
+  padding: 20rpx 24rpx;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: 1.6;
+}
+
+.btnRow {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 20rpx;
+  flex-wrap: wrap;
+}
+
+.btn {
+  @include button-reset;
+  height: 72rpx;
+  padding: 0 32rpx;
+  border-radius: $radius-button;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  transition: all $transition-base;
+  &:active { opacity: 0.9; transform: scale(0.98); }
+
+  &.primary {
+    background: $color-primary;
+    color: $color-text-white;
+  }
+  &.success {
+    background: $color-success;
+    color: $color-text-white;
+  }
+  &.warning {
+    background: $color-warning;
+    color: $color-text-white;
+  }
+  &.ghost {
+    background: transparent;
+    color: $color-primary;
+    border: 2rpx solid $color-primary-light;
+  }
+  &.danger {
+    background: $color-error;
+    color: $color-text-white;
+  }
+  &.disabled {
+    opacity: 0.6;
+  }
+}
+
+/* 人工复审提示条 */
+.bannerText {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  line-height: 1.6;
+}
+
+/* 日志区"等待人工处理"提示 */
+.pausedText {
+  font-size: $font-size-xs;
+  color: $color-warning;
+}
+
+/* 章节列表 */
+.chapterItem {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: 24rpx 28rpx;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-sm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all $transition-base;
+  &:active { transform: scale(0.99); }
+}
+
+.chapterInfo {
+  flex: 1;
+  min-width: 0;
+}
+.chapterTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  @include text-ellipsis;
+}
+.chapterMeta {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 6rpx;
+}
+
+.badge {
+  font-size: $font-size-xs;
+  padding: 4rpx 14rpx;
+  border-radius: 32rpx;
+  flex-shrink: 0;
+  margin-left: 12rpx;
+  &.pass   { background: #d1fae5; color: $color-success; }
+  &.pending{ background: #fef3c7; color: $color-warning; }
+  &.fail   { background: #fee2e2; color: $color-error; }
+}
+
+/* 时间线 */
+.timeline {
+  max-height: 400rpx;
+  overflow-y: auto;
+}
+.logItem {
+  padding: 16rpx 0;
+  border-bottom: 2rpx dashed $color-divider;
+  display: flex;
+  gap: 16rpx;
+}
+.logDot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 999rpx;
+  background: $color-primary;
+  margin-top: 12rpx;
+  flex-shrink: 0;
+}
+.logBody {
+  flex: 1;
+  min-width: 0;
+}
+.logAgent {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+.logMsg {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 4rpx;
+  @include text-ellipsis;
+}
+.logTime {
+  font-size: 20rpx;
+  color: $color-text-disabled;
+}
+
+.emptyBox {
+  text-align: center;
+  padding: 40rpx;
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
+.tap {
+  opacity: 0.86;
+}

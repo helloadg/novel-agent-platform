@@ -1,0 +1,165 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding: $spacing-lg $page-padding;
+  padding-bottom: 200rpx;
+}
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+.cardTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.badge {
+  font-size: $font-size-xs;
+  padding: 6rpx 20rpx;
+  border-radius: $radius-button;
+  &.pass    { background: #d1fae5; color: $color-success; }
+  &.pending { background: #fef3c7; color: $color-warning; }
+  &.fail    { background: #fee2e2; color: $color-error; }
+}
+
+.metaText {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+/* 审核问题 */
+.issueBox {
+  background: #fef3c7;
+  border: 2rpx solid #fde68a;
+  border-radius: $radius-md;
+  padding: 20rpx 24rpx;
+  font-size: $font-size-sm;
+  color: #92400e;
+  line-height: 1.6;
+  max-height: 280rpx;
+  overflow-y: auto;
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+/* 正文 */
+.bodyEditor {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 520rpx;
+  background: #f9fafb;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-md;
+  padding: 24rpx;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: 1.8;
+}
+
+/* 修改意见 */
+.hintEditor {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 160rpx;
+  background: #f9fafb;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-md;
+  padding: 20rpx 24rpx;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: 1.6;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+.tip {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 10rpx;
+  display: block;
+}
+
+/* 按钮区 */
+.btnGroup {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20rpx $page-padding;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: $color-bg-card;
+  box-shadow: $shadow-float;
+  display: flex;
+  gap: 14rpx;
+}
+
+.btn {
+  @include button-reset;
+  flex: 1;
+  height: $button-height-lg;
+  border-radius: $radius-button;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  transition: all $transition-base;
+  &:active { opacity: 0.9; transform: scale(0.98); }
+
+  &.primary {
+    background: $color-primary;
+    color: $color-text-white;
+  }
+  &.success {
+    background: $color-success;
+    color: $color-text-white;
+  }
+  &.warning {
+    background: $color-warning;
+    color: $color-text-white;
+  }
+  &.ghost {
+    background: transparent;
+    color: $color-primary;
+    border: 2rpx solid $color-primary-light;
+  }
+  &.disabled {
+    opacity: 0.6;
+  }
+}
+
+.empty {
+  text-align: center;
+  padding: 80rpx;
+  color: $color-text-tertiary;
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.tap {
+  opacity: 0.86;
+}

@@ -1,0 +1,88 @@
+# =========================================
+# novel-agent-platform - docker-compose
+# 一键启动: PostgreSQL + 后端 + 前端
+# 可选: 取消注释 Prometheus / Grafana 启用监控
+# =========================================
+services:
+  # ============ PostgreSQL 16 ============
+  postgres:
+    image: postgres:16-alpine
+    container_name: novel-agent-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${PG_USER:-postgres}
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-postgres}
+      POSTGRES_DB: ${PG_DB:-novel_agent}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # ============ 后端 Spring Boot ============
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: novel-agent-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PG_HOST: postgres
+      PG_PORT: 5432
+      PG_DB: ${PG_DB:-novel_agent}
+      PG_USER: ${PG_USER:-postgres}
+      PG_PASSWORD: ${PG_PASSWORD:-postgres}
+      # 默认 LLM (页面模型配置可覆盖, 这里给一个 fallback)
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-sk-demo}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.deepseek.com/v1}
+      OPENAI_MODEL_NAME: ${OPENAI_MODEL_NAME:-deepseek-chat}
+      JAVA_OPTS: "-Xms256m -Xmx512m -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
+    ports:
+      - "8080:8080"
+
+  # ============ 前端 Vue 3 + Nginx ============
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: novel-agent-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+  # ============ Prometheus (可选监控) ============
+  # prometheus:
+  #   image: prom/prometheus:latest
+  #   container_name: novel-agent-prometheus
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  #     - prometheus-data:/prometheus
+  #   ports:
+  #     - "9090:9090"
+
+  # ============ Grafana (可选监控面板) ============
+  # grafana:
+  #   image: grafana/grafana:latest
+  #   container_name: novel-agent-grafana
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin123}
+  #   volumes:
+  #     - grafana-data:/var/lib/grafana
+
+volumes:
+  pg-data:
+  # prometheus-data:
+  # grafana-data:
